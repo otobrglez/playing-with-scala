@@ -58,12 +58,83 @@ class ExperimentingSpec extends FlatSpec {
   }
 
   it should "objects" in {
+    // object = singelton
     object Pozdrav {
       def english = "Hi"
+
       def slovenian = "Pozdrav"
     }
 
     assert(Pozdrav.english == "Hi")
+
+    val x = Pozdrav
+    val y = x
+
+    println(x)
+    println(y)
+  }
+
+  it should "object + class" in {
+    class Person(val name: String, val country: String)
+
+    object Person {
+      def build(name: String, country: String) = {
+        country match {
+          case "slovenia" => Some(new Person(name, "Slovenian"))
+          case _ => Some(new Person(name, country))
+        }
+      }
+    }
+
+    val me = Person.build("Oto", "slovenia")
+    assert(me.get.country == "Slovenian")
+  }
+
+  it should "class II" in {
+    class SecretAgent(val name: String) {
+      def shoot(n: Int) {
+        SecretAgent.decrementBullets(n)
+      }
+    }
+
+    object SecretAgent {
+      //This is encapsulated!
+      var bullets: Int = 3000
+
+      private def decrementBullets(count: Int) {
+        if (bullets - count <= 0) bullets = 0
+        else bullets = bullets - count
+      }
+    }
+
+    val bond = new SecretAgent("James Bond")
+    val felix = new SecretAgent("Felix Leitner")
+    val jason = new SecretAgent("Jason Bourne")
+    val _99 = new SecretAgent("99")
+    val max = new SecretAgent("Max Smart")
+
+    bond.shoot(800)
+    felix.shoot(200)
+    jason.shoot(150)
+    _99.shoot(150)
+    max.shoot(200)
+
+    assert(SecretAgent.bullets == 1500)
+  }
+
+  it should "class III" in {
+    class Person (val name:String,  private val superheroName:String)  //The superhero name is private!
+
+    object Person {
+      def showMeInnerSecret(x:Person) = x.superheroName
+    }
+
+    val clark = new Person("Clark Kent", "Superman")
+    val peter = new Person("Peter Parker", "Spiderman")
+    val bruce = new Person("Bruce Wayne", "Batman")
+    val diana = new Person("Diana Prince", "Wonder Woman")
+
+    assert(Person.showMeInnerSecret(clark) == "Superman")
   }
 }
 
