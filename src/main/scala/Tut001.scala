@@ -1,6 +1,5 @@
 object Tut001 {
   def main(args: Array[String]): Unit = {
-
     assert(1 == 1)
 
     case class Person(ime: String)
@@ -10,6 +9,5 @@ object Tut001 {
 
     val people = List(me, you)
     assert(people.length == 2)
-
   }
 }
