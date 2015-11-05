@@ -7,6 +7,8 @@ Just me playing with Scala,... most of the play goes on in [test folder](src/tes
 ## Development
 
   sbt test
+  sbt  ~test-only MoreScalaSpec
+  sbt 
 
 ## Resources
 

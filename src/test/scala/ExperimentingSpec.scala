@@ -29,7 +29,6 @@ class ExperimentingSpec extends FlatSpec {
     assert(a.y == 6)
 
     assert(a.toString() == "(12,6)")
-    println(a)
   }
 
   it should "options" in {
@@ -69,9 +68,6 @@ class ExperimentingSpec extends FlatSpec {
 
     val x = Pozdrav
     val y = x
-
-    println(x)
-    println(y)
   }
 
   it should "object + class" in {
