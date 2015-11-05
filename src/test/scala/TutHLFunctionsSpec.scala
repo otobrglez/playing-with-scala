@@ -5,7 +5,7 @@ class TutHLFunctionsSpec extends FlatSpec {
   it should "have functions" in {
     assert(1 == 1)
 
-    def addOne = { _ + 1 }
+    def addOne = { x: Int => x + 1 }
     def reduceTwo = (x: Int) => x - 2
     def sumTwo = (x: Int, y: Int) => x + y
 
